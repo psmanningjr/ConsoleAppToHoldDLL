@@ -128,6 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleAppToHoldDLL.cpp" />
+    <ClCompile Include="DoubleLinkedListNode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DoubleLinkedListNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
