@@ -15,6 +15,7 @@ namespace UnitTests
 		{
 			std::shared_ptr <DoubleLinkedList> dlList = std::make_shared<DoubleLinkedList>();
 			std::shared_ptr <DoubleLinkedListNode> dllNode = std::make_shared<DoubleLinkedListNode>();
+			Assert::AreEqual(nullptr, dlList->head(), L"head not null");
 		}
 	};
 }
