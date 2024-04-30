@@ -99,8 +99,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories);../ConsoleAppToHoldDLL/x64/Debug/DoubleLinkedListNode</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);../ConsoleAppToHoldDLL/x64/Debug/DoubleLinkedListNode</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories);../ConsoleAppToHoldDLL/x64/Debug/DoubleLinkedListNode;../ConsoleAppToHoldDLL/x64/Debug/DoubleLinkedList</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);../ConsoleAppToHoldDLL/x64/Debug/DoubleLinkedListNode;../ConsoleAppToHoldDLL/x64/Debug/DoubleLinkedList</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

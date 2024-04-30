@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
+#include "../ConsoleAppToHoldDLL/DoubleLinkedList.h"
 #include "../ConsoleAppToHoldDLL/DoubleLinkedListNode.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -10,9 +11,10 @@ namespace UnitTests
 	{
 	public:
 		
-		TEST_METHOD(TestDoubleLinkedListNode)
+		TEST_METHOD(TestDoubleLinkedList)
 		{
-			DoubleLinkedListNode dllNode;
+			std::shared_ptr <DoubleLinkedList> dlList = std::make_shared<DoubleLinkedList>();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = std::make_shared<DoubleLinkedListNode>();
 		}
 	};
 }
