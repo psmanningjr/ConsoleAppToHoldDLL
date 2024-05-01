@@ -7,6 +7,10 @@ void DoubleLinkedList::insertAtFront(std::shared_ptr <DoubleLinkedListNode> newN
 }
 
 void DoubleLinkedList::insertAtEnd(std::shared_ptr <DoubleLinkedListNode> newNode) {
+	if (head == nullptr && tail == nullptr) {
+		head = newNode;
+		tail = newNode;
+	}
 
 }
 
