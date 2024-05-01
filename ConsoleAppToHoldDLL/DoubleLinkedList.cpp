@@ -1,4 +1,12 @@
 #include "DoubleLinkedList.h"
+std::shared_ptr <DoubleLinkedListNode> DoubleLinkedList::getHeadPtr() {
+	return head;
+}
+
+std::shared_ptr <DoubleLinkedListNode> DoubleLinkedList::getTailPtr() {
+	return tail;
+}
+
 void DoubleLinkedList::insertAtFront(std::shared_ptr <DoubleLinkedListNode> newNode) {
 	head = newNode;
 	if (tail == nullptr) {

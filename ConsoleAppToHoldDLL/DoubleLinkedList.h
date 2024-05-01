@@ -4,10 +4,13 @@
 
 class DoubleLinkedList
 {
-public:
+protected:
 	std::shared_ptr <DoubleLinkedListNode> head;
 	std::shared_ptr <DoubleLinkedListNode> tail;
 
+public:
+	std::shared_ptr <DoubleLinkedListNode> getHeadPtr();
+	std::shared_ptr <DoubleLinkedListNode> getTailPtr();
 	void insertAtFront(std::shared_ptr <DoubleLinkedListNode> newNode);
 	void insertAtEnd(std::shared_ptr <DoubleLinkedListNode> newNode);
 };

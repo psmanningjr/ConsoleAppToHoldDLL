@@ -29,16 +29,16 @@ namespace UnitTests
 		}
 		TEST_METHOD(TestDoubleLinkedListConstructor)
 		{
-			Assert::IsTrue(dlList->head == nullptr, L"head not null");
-			Assert::IsTrue(dlList->tail == nullptr, L"tail not null");
+			Assert::IsTrue(dlList->getHeadPtr() == nullptr, L"head not null");
+			Assert::IsTrue(dlList->getTailPtr() == nullptr, L"tail not null");
 			apData = std::make_shared<ApplicationData>();
 			Assert::AreEqual(std::string(""), apData->name, L"name default is wrong");
 		}
 		TEST_METHOD(TestDoubleLinkedListInsertAtFrontEmptyList)
 		{
 			dlList->insertAtFront(dllNode);
-			Assert::IsTrue(dllNode == dlList->head, L"head is not set correctly");
-			Assert::IsTrue(dllNode == dlList->tail, L"tail is not set correctly");
+			Assert::IsTrue(dllNode == dlList->getHeadPtr(), L"head is not set correctly");
+			Assert::IsTrue(dllNode == dlList->getTailPtr(), L"tail is not set correctly");
 		}
 
 		TEST_METHOD(TestDoubleLinkedListInsertAtFrontNonEmptyList)
@@ -49,16 +49,16 @@ namespace UnitTests
 			dllNode2->setAppData(apData2);
 			dlList->insertAtFront(dllNode2);
 
-			Assert::IsTrue(dllNode2 == dlList->head, L"head is not set correctly");
-			Assert::IsTrue(dllNode == dlList->tail, L"tail is not set correctly");
+			Assert::IsTrue(dllNode2 == dlList->getHeadPtr(), L"head is not set correctly");
+			Assert::IsTrue(dllNode == dlList->getTailPtr(), L"tail is not set correctly");
 		}
 
 		TEST_METHOD(TestDoubleLinkedListInsertAtEndEmptyList)
 		{
 			dlList->insertAtEnd(dllNode);
 
-			Assert::IsTrue(dllNode == dlList->head, L"head is not set correctly");
-			Assert::IsTrue(dllNode == dlList->tail, L"tail is not set correctly");
+			Assert::IsTrue(dllNode == dlList->getHeadPtr(), L"head is not set correctly");
+			Assert::IsTrue(dllNode == dlList->getTailPtr(), L"tail is not set correctly");
 		}
 	};
 }
