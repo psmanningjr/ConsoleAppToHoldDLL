@@ -12,6 +12,7 @@ namespace UnitTests
 	{
 	public:
 		const std::string TEST_APP_NAME = "my test app";
+		const std::string TEST_APP_NAME_2 = "my second test app";
 
 		std::shared_ptr <DoubleLinkedList> dlList;
 		std::shared_ptr <DoubleLinkedListNode> dllNode;
@@ -39,6 +40,19 @@ namespace UnitTests
 			Assert::IsTrue(dllNode == dlList->head, L"head is not set correctly");
 			Assert::IsTrue(dllNode == dlList->tail, L"tail is not set correctly");
 		}
+
+		TEST_METHOD(TestDoubleLinkedListInsertAtFrontNonEmptyList)
+		{
+			dlList->insertAtFront(dllNode);
+			std::shared_ptr <ApplicationData> apData2 = std::make_shared<ApplicationData>(TEST_APP_NAME_2);
+			std::shared_ptr <DoubleLinkedListNode> dllNode2 = std::make_shared<DoubleLinkedListNode>();
+			dllNode2->setAppData(apData2);
+			dlList->insertAtFront(dllNode2);
+
+			Assert::IsTrue(dllNode2 == dlList->head, L"head is not set correctly");
+			Assert::IsTrue(dllNode == dlList->tail, L"tail is not set correctly");
+		}
+
 		TEST_METHOD(TestDoubleLinkedListInsertAtEndEmptyList)
 		{
 			dlList->insertAtEnd(dllNode);
