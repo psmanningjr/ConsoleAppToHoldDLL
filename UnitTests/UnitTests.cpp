@@ -11,11 +11,18 @@ namespace UnitTests
 	{
 	public:
 		
-		TEST_METHOD(TestDoubleLinkedList)
+		TEST_METHOD(TestDoubleLinkedListConstructor)
 		{
 			std::shared_ptr <DoubleLinkedList> dlList = std::make_shared<DoubleLinkedList>();
 			std::shared_ptr <DoubleLinkedListNode> dllNode = std::make_shared<DoubleLinkedListNode>();
-			Assert::AreEqual(nullptr, dlList->head(), L"head not null");
+			Assert::IsTrue(dlList->head == nullptr, L"head not null");
+			Assert::IsTrue(dlList->tail == nullptr, L"tail not null");
+		}
+		TEST_METHOD(TestDoubleLinkedListInsertAtFront)
+		{
+			std::shared_ptr <DoubleLinkedList> dlList = std::make_shared<DoubleLinkedList>();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = std::make_shared<DoubleLinkedListNode>();
+			dlList->insertAtFront(dllNode);
 		}
 	};
 }
