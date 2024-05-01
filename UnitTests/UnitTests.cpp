@@ -33,10 +33,18 @@ namespace UnitTests
 			apData = std::make_shared<ApplicationData>();
 			Assert::AreEqual(std::string(""), apData->name, L"name default is wrong");
 		}
-		TEST_METHOD(TestDoubleLinkedListInsertAtFront)
+		TEST_METHOD(TestDoubleLinkedListInsertAtFrontEmptyList)
 		{
 			dlList->insertAtFront(dllNode);
 			Assert::IsTrue(dllNode == dlList->head, L"head is not set correctly");
+			Assert::IsTrue(dllNode == dlList->tail, L"tail is not set correctly");
+		}
+		TEST_METHOD(TestDoubleLinkedListInsertAtEndEmptyList)
+		{
+			dlList->insertAtEnd(dllNode);
+
+			Assert::IsTrue(dllNode == dlList->head, L"head is not set correctly");
+			Assert::IsTrue(dllNode == dlList->tail, L"tail is not set correctly");
 		}
 	};
 }

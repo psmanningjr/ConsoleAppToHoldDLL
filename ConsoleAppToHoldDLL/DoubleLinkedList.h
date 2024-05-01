@@ -9,5 +9,6 @@ public:
 	std::shared_ptr <DoubleLinkedListNode> tail;
 
 	void insertAtFront(std::shared_ptr <DoubleLinkedListNode> newNode);
+	void insertAtEnd(std::shared_ptr <DoubleLinkedListNode> newNode);
 };
 
