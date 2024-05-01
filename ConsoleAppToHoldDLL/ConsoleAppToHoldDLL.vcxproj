@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ApplicationData.cpp" />
     <ClCompile Include="ConsoleAppToHoldDLL.cpp" />
     <ClCompile Include="DoubleLinkedList.cpp" />
     <ClCompile Include="DoubleLinkedListNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ApplicationData.h" />
     <ClInclude Include="DoubleLinkedList.h" />
     <ClInclude Include="DoubleLinkedListNode.h" />
   </ItemGroup>

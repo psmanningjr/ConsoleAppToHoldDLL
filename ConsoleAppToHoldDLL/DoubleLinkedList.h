@@ -8,6 +8,6 @@ public:
 	std::shared_ptr <DoubleLinkedListNode> head;
 	std::shared_ptr <DoubleLinkedListNode> tail;
 
-	void insertAtFront(std::shared_ptr <DoubleLinkedListNode>);
+	void insertAtFront(std::shared_ptr <DoubleLinkedListNode> newNode);
 };
 
