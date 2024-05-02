@@ -178,7 +178,7 @@ namespace UnitTests
 			Assert::IsTrue(dllNode3->nextNode == dllNode, L"new node next Data not dll inserted before");
 			Assert::IsTrue(dllNode2->nextNode == dllNode3, L"old data nextData not new node");
 		}
-		TEST_METHOD(TestDoubleLinkedListremoveNodeLast)
+		TEST_METHOD(TestDoubleLinkedListremoveLastNode)
 		{
 			setAppDataInDllNode();
 			dlList->insertAtFront(dllNode);
@@ -187,6 +187,36 @@ namespace UnitTests
 
 			Assert::IsTrue(dlList->getHeadPtr() == nullptr, L"head not null");
 			Assert::IsTrue(dlList->getTailPtr() == nullptr, L"Tail not null");
+		}
+		TEST_METHOD(TestDoubleLinkedListremove2ndToLastNode)
+		{
+			setAppDataInDllNode();
+			dlList->insertAtFront(dllNode);
+
+			set2ndAppDataInDllNode();
+			dlList->insertAtFront(dllNode2);
+
+			dlList->removeNode(dllNode2);
+
+			Assert::IsTrue(dlList->getHeadPtr() == dllNode, L"head not last node");
+			Assert::IsTrue(dlList->getTailPtr() == dllNode, L"Tail not last node");
+			Assert::IsTrue(dllNode->prevNode == nullptr, L"last node prev not null");
+			Assert::IsTrue(dllNode->nextNode == nullptr, L"last node next not null");
+		}
+		TEST_METHOD(TestDoubleLinkedListremoveLastNodeFromListOf2)
+		{
+			setAppDataInDllNode();
+			dlList->insertAtFront(dllNode);
+
+			set2ndAppDataInDllNode();
+			dlList->insertAtFront(dllNode2);
+
+			dlList->removeNode(dllNode);
+
+			Assert::IsTrue(dlList->getHeadPtr() == dllNode2, L"head not last node");
+			Assert::IsTrue(dlList->getTailPtr() == dllNode2, L"Tail not last node");
+			Assert::IsTrue(dllNode2->prevNode == nullptr, L"last node prev not null");
+			Assert::IsTrue(dllNode2->nextNode == nullptr, L"last node next not null");
 		}
 	};
 }

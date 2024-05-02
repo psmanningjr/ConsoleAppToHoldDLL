@@ -64,7 +64,29 @@ void DoubleLinkedList::insertAfterNode(std::shared_ptr <DoubleLinkedListNode> af
 	}
 }
 void DoubleLinkedList::removeNode(std::shared_ptr <DoubleLinkedListNode> removeNode) {
+	if (removeNode != nullptr) {
+		if (head == removeNode) {
+			if (removeNode->nextNode != nullptr) {
+				head = removeNode->nextNode;
+			}
+			else {
+				head = nullptr;
+				tail = nullptr;
+			}
+		}
+		else {
+			if (tail == removeNode) {
+				if (tail->prevNode != nullptr) {
+					tail->prevNode->nextNode = nullptr;
+					tail = tail->prevNode;
+				}
+			}
+		}
+		if (removeNode->prevNode != nullptr) {
+			removeNode->prevNode->nextNode = removeNode->nextNode;
+		}
+		if (removeNode->nextNode != nullptr) {
+			removeNode->nextNode->prevNode = removeNode->prevNode;
+		}
+	}
 }
-
-
-
