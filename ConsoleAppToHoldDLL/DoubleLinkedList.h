@@ -15,5 +15,7 @@ public:
 	void insertAtEnd(std::shared_ptr <DoubleLinkedListNode> newNode);
 	void insertBeforeNode(std::shared_ptr <DoubleLinkedListNode> beforeThisNode,
 	                      std::shared_ptr <DoubleLinkedListNode> newNode);
+	void insertAfterNode(std::shared_ptr <DoubleLinkedListNode> afterThisNode,
+		std::shared_ptr <DoubleLinkedListNode> newNode);
 };
 

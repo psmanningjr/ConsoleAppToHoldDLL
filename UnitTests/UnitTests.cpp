@@ -111,7 +111,7 @@ namespace UnitTests
 			Assert::IsTrue(dllNode->prevNode == nullptr, L"prevData not null");
 			Assert::IsTrue(dllNode->nextNode == dllNode2, L"node next is not second node");
 		}
-		TEST_METHOD(TestDoubleLinkedListInsertNode3beforeNonFirstNode)
+		TEST_METHOD(TestDoubleLinkedListInsertNode3BeforeNonFirstNode)
 		{
 			setAppDataInDllNode();
 			dlList->insertAtFront(dllNode);
@@ -127,7 +127,7 @@ namespace UnitTests
 			Assert::IsTrue(dllNode3->nextNode == dllNode, L"new node next Data not dll inserted before");
 			Assert::IsTrue(dllNode2->nextNode == dllNode3, L"old data nextData not new node");
 		}
-		TEST_METHOD(TestDoubleLinkedListInsertNode3beforeFirstNode)
+		TEST_METHOD(TestDoubleLinkedListInsertNode3BeforeFirstNode)
 		{
 			setAppDataInDllNode();
 			dlList->insertAtFront(dllNode);
@@ -145,6 +145,38 @@ namespace UnitTests
 			Assert::IsTrue(dllNode2->nextNode == dllNode, L"old data nextData not null");
 			Assert::IsTrue(dllNode2->prevNode == dllNode3, L"old node previous is not new node");
 
+		}
+		TEST_METHOD(TestDoubleLinkedListInsertNode3AfterLastNode)
+		{
+			setAppDataInDllNode();
+			dlList->insertAtFront(dllNode);
+
+			set2ndAppDataInDllNode();
+			dlList->insertAtFront(dllNode2);
+
+			set3rdAppDataInDllNode();
+			dlList->insertAfterNode(dllNode, dllNode3);
+
+			Assert::IsTrue(dllNode3 == dlList->getTailPtr(), L"tail is not set correctly");
+			Assert::IsTrue(dllNode3->prevNode == dllNode, L"new node prev is not original node");
+			Assert::IsTrue(dllNode3->nextNode == nullptr, L"new nextData not null");
+			Assert::IsTrue(dllNode->nextNode == dllNode3, L"node next is not second node");
+		}
+		TEST_METHOD(TestDoubleLinkedListInsertNode3AfterFirstNode)
+		{
+			setAppDataInDllNode();
+			dlList->insertAtFront(dllNode);
+
+			set2ndAppDataInDllNode();
+			dlList->insertAtFront(dllNode2);
+
+			set3rdAppDataInDllNode();
+			dlList->insertAfterNode(dllNode2, dllNode3);
+
+			Assert::IsTrue(dllNode3 == dllNode->prevNode, L"dll prev Node is not set correctly");
+			Assert::IsTrue(dllNode3->prevNode == dllNode2, L"dl3 prev node prev is not prev node");
+			Assert::IsTrue(dllNode3->nextNode == dllNode, L"new node next Data not dll inserted before");
+			Assert::IsTrue(dllNode2->nextNode == dllNode3, L"old data nextData not new node");
 		}
 	};
 }

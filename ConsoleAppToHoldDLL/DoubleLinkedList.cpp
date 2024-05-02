@@ -35,7 +35,7 @@ void DoubleLinkedList::insertAtEnd(std::shared_ptr <DoubleLinkedListNode> newNod
 }
 
 void DoubleLinkedList::insertBeforeNode(std::shared_ptr <DoubleLinkedListNode> beforeThisNode,
-	                                    std::shared_ptr <DoubleLinkedListNode> newNode) {
+	std::shared_ptr <DoubleLinkedListNode> newNode) {
 	if (beforeThisNode == head) {
 		insertAtFront(newNode);
 	}
@@ -46,6 +46,15 @@ void DoubleLinkedList::insertBeforeNode(std::shared_ptr <DoubleLinkedListNode> b
 			beforeThisNode->prevNode = newNode;
 		}
 		newNode->nextNode = beforeThisNode;
+	}
+}
+
+void DoubleLinkedList::insertAfterNode(std::shared_ptr <DoubleLinkedListNode> afterThisNode,
+	std::shared_ptr <DoubleLinkedListNode> newNode) {
+	if (afterThisNode == tail) {
+		insertAtEnd(newNode);
+	}
+	else {
 	}
 }
 
