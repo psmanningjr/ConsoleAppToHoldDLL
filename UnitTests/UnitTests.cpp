@@ -13,25 +13,46 @@ namespace UnitTests
 	public:
 		const std::string TEST_APP_NAME = "my test app";
 		const std::string TEST_APP_NAME_2 = "my second test app";
+		const std::string TEST_APP_NAME_3 = "my third test app";
 
 		std::shared_ptr <DoubleLinkedList> dlList;
 		std::shared_ptr <DoubleLinkedListNode> dllNode;
 		std::shared_ptr <ApplicationData> apData;
+		std::shared_ptr <DoubleLinkedListNode> dllNode2;
+		std::shared_ptr <ApplicationData> apData2;
+		std::shared_ptr <DoubleLinkedListNode> dllNode3;
+		std::shared_ptr <ApplicationData> apData3;
 
 		UnitTests() {
 			dlList = std::make_shared<DoubleLinkedList>();
-			dllNode = std::make_shared<DoubleLinkedListNode>();
 		}
 
 		void setAppDataInDllNode() {
+			dllNode = std::make_shared<DoubleLinkedListNode>();
 			apData = std::make_shared<ApplicationData>(TEST_APP_NAME);
 			Assert::AreEqual(TEST_APP_NAME, apData->name, L"name not set");
 			dllNode->appData = apData;
 			Assert::AreEqual(TEST_APP_NAME, dllNode->appData->name, L"Wrong app data");
 		}
 
+		void set2ndAppDataInDllNode() {
+			dllNode2 = std::make_shared<DoubleLinkedListNode>();
+			apData2 = std::make_shared<ApplicationData>(TEST_APP_NAME_2);
+			Assert::AreEqual(TEST_APP_NAME_2, apData2->name, L"name not set");
+			dllNode2->appData = apData2;
+			Assert::AreEqual(TEST_APP_NAME_2, dllNode2->appData->name, L"Wrong app data");
+		}
+
+		void set3rdAppDataInDllNode() {
+			dllNode3 = std::make_shared<DoubleLinkedListNode>();
+			apData3 = std::make_shared<ApplicationData>(TEST_APP_NAME_3);
+			Assert::AreEqual(TEST_APP_NAME_3, apData3->name, L"name not set");
+			dllNode3->appData = apData3;
+			Assert::AreEqual(TEST_APP_NAME_3, dllNode3->appData->name, L"Wrong app data");
+		}
 		TEST_METHOD(TestDoubleLinkedListConstructor)
 		{
+			dllNode = std::make_shared<DoubleLinkedListNode>();
 			Assert::IsTrue(dlList->getHeadPtr() == nullptr, L"head not null");
 			Assert::IsTrue(dlList->getTailPtr() == nullptr, L"tail not null");
 			Assert::IsTrue(dllNode->appData == nullptr, L"appData not null");
@@ -54,9 +75,7 @@ namespace UnitTests
 		{
 			setAppDataInDllNode();
 			dlList->insertAtFront(dllNode);
-			std::shared_ptr <ApplicationData> apData2 = std::make_shared<ApplicationData>(TEST_APP_NAME_2);
-			std::shared_ptr <DoubleLinkedListNode> dllNode2 = std::make_shared<DoubleLinkedListNode>();
-			dllNode2->appData = apData2;
+			set2ndAppDataInDllNode();
 
 			dlList->insertAtFront(dllNode2);
 
@@ -81,9 +100,7 @@ namespace UnitTests
 		{
 			setAppDataInDllNode();
 			dlList->insertAtFront(dllNode);
-			std::shared_ptr <ApplicationData> apData2 = std::make_shared<ApplicationData>(TEST_APP_NAME_2);
-			std::shared_ptr <DoubleLinkedListNode> dllNode2 = std::make_shared<DoubleLinkedListNode>();
-			dllNode2->appData = apData2;
+			set2ndAppDataInDllNode();
 
 			dlList->insertAtEnd(dllNode2);
 
@@ -93,6 +110,41 @@ namespace UnitTests
 			Assert::IsTrue(dllNode == dlList->getHeadPtr(), L"head is not set correctly");
 			Assert::IsTrue(dllNode->prevNode == nullptr, L"prevData not null");
 			Assert::IsTrue(dllNode->nextNode == dllNode2, L"node next is not second node");
+		}
+		TEST_METHOD(TestDoubleLinkedListInsertNode3beforeNonFirstNode)
+		{
+			setAppDataInDllNode();
+			dlList->insertAtFront(dllNode);
+
+			set2ndAppDataInDllNode();
+			dlList->insertAtFront(dllNode2);
+
+			set3rdAppDataInDllNode();
+			dlList ->insertBeforeNode(dllNode, dllNode3);
+
+			Assert::IsTrue(dllNode3 == dllNode->prevNode, L"dll prev Node is not set correctly");
+			Assert::IsTrue(dllNode3->prevNode == dllNode2, L"dl3 prev node prev is not prev node");
+			Assert::IsTrue(dllNode3->nextNode == dllNode, L"new node next Data not dll inserted before");
+			Assert::IsTrue(dllNode2->nextNode == dllNode3, L"old data nextData not new node");
+		}
+		TEST_METHOD(TestDoubleLinkedListInsertNode3beforeFirstNode)
+		{
+			setAppDataInDllNode();
+			dlList->insertAtFront(dllNode);
+
+			set2ndAppDataInDllNode();
+			dlList->insertAtFront(dllNode2);
+
+			set3rdAppDataInDllNode();
+			dlList->insertBeforeNode(dllNode2, dllNode3);
+
+			Assert::IsTrue(dllNode3 == dlList->getHeadPtr(), L"head is not set correctly");
+			Assert::IsTrue(dllNode3->nextNode == dllNode2, L"head node next is not original head node");
+			Assert::IsTrue(dllNode3->prevNode == nullptr, L"new node prev Data not null");
+			Assert::IsTrue(dllNode == dlList->getTailPtr(), L"tail is not set correctly");
+			Assert::IsTrue(dllNode2->nextNode == dllNode, L"old data nextData not null");
+			Assert::IsTrue(dllNode2->prevNode == dllNode3, L"old node previous is not new node");
+
 		}
 	};
 }
