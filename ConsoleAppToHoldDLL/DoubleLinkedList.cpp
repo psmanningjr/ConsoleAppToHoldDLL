@@ -63,6 +63,8 @@ void DoubleLinkedList::insertAfterNode(std::shared_ptr <DoubleLinkedListNode> af
 		}
 	}
 }
+void DoubleLinkedList::removeNode(std::shared_ptr <DoubleLinkedListNode> removeNode) {
+}
 
 
 

@@ -17,5 +17,7 @@ public:
 	                      std::shared_ptr <DoubleLinkedListNode> newNode);
 	void insertAfterNode(std::shared_ptr <DoubleLinkedListNode> afterThisNode,
 		std::shared_ptr <DoubleLinkedListNode> newNode);
+	void removeNode(std::shared_ptr <DoubleLinkedListNode> removeNode);
+
 };
 

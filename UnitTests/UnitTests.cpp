@@ -120,7 +120,7 @@ namespace UnitTests
 			dlList->insertAtFront(dllNode2);
 
 			set3rdAppDataInDllNode();
-			dlList ->insertBeforeNode(dllNode, dllNode3);
+			dlList->insertBeforeNode(dllNode, dllNode3);
 
 			Assert::IsTrue(dllNode3 == dllNode->prevNode, L"dll prev Node is not set correctly");
 			Assert::IsTrue(dllNode3->prevNode == dllNode2, L"dl3 prev node prev is not prev node");
@@ -177,6 +177,16 @@ namespace UnitTests
 			Assert::IsTrue(dllNode3->prevNode == dllNode2, L"dl3 prev node prev is not prev node");
 			Assert::IsTrue(dllNode3->nextNode == dllNode, L"new node next Data not dll inserted before");
 			Assert::IsTrue(dllNode2->nextNode == dllNode3, L"old data nextData not new node");
+		}
+		TEST_METHOD(TestDoubleLinkedListremoveNodeLast)
+		{
+			setAppDataInDllNode();
+			dlList->insertAtFront(dllNode);
+
+			dlList->removeNode(dllNode);
+
+			Assert::IsTrue(dlList->getHeadPtr() == nullptr, L"head not null");
+			Assert::IsTrue(dlList->getTailPtr() == nullptr, L"Tail not null");
 		}
 	};
 }
