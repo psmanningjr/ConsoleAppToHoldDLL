@@ -55,6 +55,12 @@ void DoubleLinkedList::insertAfterNode(std::shared_ptr <DoubleLinkedListNode> af
 		insertAtEnd(newNode);
 	}
 	else {
+		newNode->prevNode = afterThisNode;
+		if (afterThisNode->nextNode != nullptr) {
+			newNode->nextNode = afterThisNode->nextNode;
+			afterThisNode->nextNode->prevNode = newNode;
+			afterThisNode->nextNode = newNode;
+		}
 	}
 }
 
