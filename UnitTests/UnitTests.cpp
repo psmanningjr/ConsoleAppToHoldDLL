@@ -16,54 +16,34 @@ namespace UnitTests
 		const std::string TEST_APP_NAME_3 = "my third test app";
 
 		std::shared_ptr <DoubleLinkedList> dlList;
-		std::shared_ptr <DoubleLinkedListNode> dllNode;
-		std::shared_ptr <ApplicationData> apData;
-		std::shared_ptr <DoubleLinkedListNode> dllNode2;
-		std::shared_ptr <ApplicationData> apData2;
-		std::shared_ptr <DoubleLinkedListNode> dllNode3;
-		std::shared_ptr <ApplicationData> apData3;
 
 		UnitTests() {
 			dlList = std::make_shared<DoubleLinkedList>();
 		}
 
-		void setAppDataInDllNode() {
-			dllNode = std::make_shared<DoubleLinkedListNode>();
-			apData = std::make_shared<ApplicationData>(TEST_APP_NAME);
-			Assert::AreEqual(TEST_APP_NAME, apData->name, L"name not set");
+		std::shared_ptr <DoubleLinkedListNode> setAppDataInDllNode(std::string appName) {
+			std::shared_ptr <DoubleLinkedListNode> dllNode = std::make_shared<DoubleLinkedListNode>();
+			std::shared_ptr <ApplicationData> apData = std::make_shared<ApplicationData>(appName);
+			Assert::AreEqual(appName, apData->name, L"name not set");
 			dllNode->appData = apData;
-			Assert::AreEqual(TEST_APP_NAME, dllNode->appData->name, L"Wrong app data");
+			Assert::AreEqual(appName, dllNode->appData->name, L"Wrong app data");
+			return dllNode;
 		}
 
-		void set2ndAppDataInDllNode() {
-			dllNode2 = std::make_shared<DoubleLinkedListNode>();
-			apData2 = std::make_shared<ApplicationData>(TEST_APP_NAME_2);
-			Assert::AreEqual(TEST_APP_NAME_2, apData2->name, L"name not set");
-			dllNode2->appData = apData2;
-			Assert::AreEqual(TEST_APP_NAME_2, dllNode2->appData->name, L"Wrong app data");
-		}
-
-		void set3rdAppDataInDllNode() {
-			dllNode3 = std::make_shared<DoubleLinkedListNode>();
-			apData3 = std::make_shared<ApplicationData>(TEST_APP_NAME_3);
-			Assert::AreEqual(TEST_APP_NAME_3, apData3->name, L"name not set");
-			dllNode3->appData = apData3;
-			Assert::AreEqual(TEST_APP_NAME_3, dllNode3->appData->name, L"Wrong app data");
-		}
 		TEST_METHOD(TestDoubleLinkedListConstructor)
 		{
-			dllNode = std::make_shared<DoubleLinkedListNode>();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = std::make_shared<DoubleLinkedListNode>();
 			Assert::IsTrue(dlList->getHeadPtr() == nullptr, L"head not null");
 			Assert::IsTrue(dlList->getTailPtr() == nullptr, L"tail not null");
 			Assert::IsTrue(dllNode->appData == nullptr, L"appData not null");
 			Assert::IsTrue(dllNode->nextNode == nullptr, L"nextData not null");
 			Assert::IsTrue(dllNode->prevNode == nullptr, L"prevData not null");
-			apData = std::make_shared<ApplicationData>();
+			std::shared_ptr <ApplicationData> apData = std::make_shared<ApplicationData>();
 			Assert::AreEqual(std::string(""), apData->name, L"name default is wrong");
 		}
 		TEST_METHOD(TestDoubleLinkedListInsertAtFrontEmptyList)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtFront(dllNode);
 			Assert::IsTrue(dllNode == dlList->getHeadPtr(), L"head is not set correctly");
 			Assert::IsTrue(dllNode == dlList->getTailPtr(), L"tail is not set correctly");
@@ -73,10 +53,10 @@ namespace UnitTests
 
 		TEST_METHOD(TestDoubleLinkedListInsertNode2AtFrontNonEmptyList)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtFront(dllNode);
-			set2ndAppDataInDllNode();
-
+			
+			std::shared_ptr <DoubleLinkedListNode> dllNode2 = setAppDataInDllNode(TEST_APP_NAME_2);
 			dlList->insertAtFront(dllNode2);
 
 			Assert::IsTrue(dllNode2 == dlList->getHeadPtr(), L"head is not set correctly");
@@ -89,7 +69,7 @@ namespace UnitTests
 
 		TEST_METHOD(TestDoubleLinkedListInsertAtEndEmptyList)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtEnd(dllNode);
 
 			Assert::IsTrue(dllNode == dlList->getHeadPtr(), L"head is not set correctly");
@@ -98,10 +78,10 @@ namespace UnitTests
 			Assert::IsTrue(dllNode->prevNode == nullptr, L"prevData not null");
 		}TEST_METHOD(TestDoubleLinkedListInsertNode2AtEndNonEmptyList)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtFront(dllNode);
-			set2ndAppDataInDllNode();
-
+			
+			std::shared_ptr <DoubleLinkedListNode> dllNode2 = setAppDataInDllNode(TEST_APP_NAME_2);
 			dlList->insertAtEnd(dllNode2);
 
 			Assert::IsTrue(dllNode2 == dlList->getTailPtr(), L"tail is not set correctly");
@@ -113,13 +93,13 @@ namespace UnitTests
 		}
 		TEST_METHOD(TestDoubleLinkedListInsertNode3BeforeNonFirstNode)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtFront(dllNode);
 
-			set2ndAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode2 = setAppDataInDllNode(TEST_APP_NAME_2);
 			dlList->insertAtFront(dllNode2);
 
-			set3rdAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode3 = setAppDataInDllNode(TEST_APP_NAME_3);
 			dlList->insertBeforeNode(dllNode, dllNode3);
 
 			Assert::IsTrue(dllNode3 == dllNode->prevNode, L"dll prev Node is not set correctly");
@@ -129,13 +109,13 @@ namespace UnitTests
 		}
 		TEST_METHOD(TestDoubleLinkedListInsertNode3BeforeFirstNode)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtFront(dllNode);
 
-			set2ndAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode2 = setAppDataInDllNode(TEST_APP_NAME_2);
 			dlList->insertAtFront(dllNode2);
 
-			set3rdAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode3 = setAppDataInDllNode(TEST_APP_NAME_3);
 			dlList->insertBeforeNode(dllNode2, dllNode3);
 
 			Assert::IsTrue(dllNode3 == dlList->getHeadPtr(), L"head is not set correctly");
@@ -148,13 +128,13 @@ namespace UnitTests
 		}
 		TEST_METHOD(TestDoubleLinkedListInsertNode3AfterLastNode)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtFront(dllNode);
 
-			set2ndAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode2 = setAppDataInDllNode(TEST_APP_NAME_2);
 			dlList->insertAtFront(dllNode2);
 
-			set3rdAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode3 = setAppDataInDllNode(TEST_APP_NAME_3);
 			dlList->insertAfterNode(dllNode, dllNode3);
 
 			Assert::IsTrue(dllNode3 == dlList->getTailPtr(), L"tail is not set correctly");
@@ -164,13 +144,13 @@ namespace UnitTests
 		}
 		TEST_METHOD(TestDoubleLinkedListInsertNode3AfterFirstNode)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtFront(dllNode);
 
-			set2ndAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode2 = setAppDataInDllNode(TEST_APP_NAME_2);
 			dlList->insertAtFront(dllNode2);
 
-			set3rdAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode3 = setAppDataInDllNode(TEST_APP_NAME_3);
 			dlList->insertAfterNode(dllNode2, dllNode3);
 
 			Assert::IsTrue(dllNode3 == dllNode->prevNode, L"dll prev Node is not set correctly");
@@ -180,7 +160,7 @@ namespace UnitTests
 		}
 		TEST_METHOD(TestDoubleLinkedListremoveLastNode)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtFront(dllNode);
 
 			dlList->removeNode(dllNode);
@@ -190,10 +170,10 @@ namespace UnitTests
 		}
 		TEST_METHOD(TestDoubleLinkedListremove2ndToLastNode)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtFront(dllNode);
 
-			set2ndAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode2 = setAppDataInDllNode(TEST_APP_NAME_2);
 			dlList->insertAtFront(dllNode2);
 
 			dlList->removeNode(dllNode2);
@@ -205,10 +185,10 @@ namespace UnitTests
 		}
 		TEST_METHOD(TestDoubleLinkedListremoveLastNodeFromListOf2)
 		{
-			setAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode = setAppDataInDllNode(TEST_APP_NAME);
 			dlList->insertAtFront(dllNode);
 
-			set2ndAppDataInDllNode();
+			std::shared_ptr <DoubleLinkedListNode> dllNode2 = setAppDataInDllNode(TEST_APP_NAME_2);
 			dlList->insertAtFront(dllNode2);
 
 			dlList->removeNode(dllNode);
